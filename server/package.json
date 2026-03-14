@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server sub repo",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "start": "tsc && dist/main.js",
+    "build": "tsc",
+    "lint": "eslint"
+  },
+  "keywords": [],
+  "author": "DiggoDev",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "fastify": "^5.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "eslint": "^10.0.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

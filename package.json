@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "docker compose --env-file .env.local up --build",
+    "start": "docker compose up --build"
   },
   "workspaces": ["client/*", "server/*"],
   "keywords": [],

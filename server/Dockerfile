@@ -5,16 +5,18 @@ FROM node:25-alpine
 WORKDIR /app
 
 # Copy package.json and package-lock.json from server folder
-COPY server/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --omit=dev
+
+RUN npm run build
 
 # Copy the rest of the server code
-COPY server/. ./
+COPY . .
 
 # Expose port 3000
-EXPOSE 3001
+EXPOSE 3005
 
-# Start server with custom command
-CMD ["npm", "run", "dev"]
+  # Start server with custom command
+CMD ["npm", "run", "start"]

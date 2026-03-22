@@ -1,8 +1,7 @@
 import Fastify from "fastify";
 import dotenv from 'dotenv'
-import path from 'path'
 
-dotenv.config({ path: path.resolve('../', '.env') })
+dotenv.config()
 
 import { initializeDb, insertUser, getUserByUsername } from "./db";
 
@@ -26,7 +25,10 @@ fastify.get('/test', async(request, reply) => {
   const dbUser = await getUserByUsername(username)
 
   return reply.send(dbUser)
+})
 
+fastify.get('/health', (request, reply) => {
+  return reply.send('OK')
 })
 
 fastify.post('/authenticate', (request, reply) => {

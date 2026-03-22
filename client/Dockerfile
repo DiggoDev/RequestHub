@@ -7,13 +7,15 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --omit=dev
+
+RUN npm run build
 
 # Copy the rest of the server code
 COPY . .
 
-# Expose port
-EXPOSE 3001
+# Expose port 3000
+EXPOSE 3000
 
-# Start server with custom command
-CMD ["npm", "run", "dev"]
+  # Start server with custom command
+CMD ["npm", "run", "start"]

@@ -35,11 +35,30 @@ services:
     ports:
       - "3001:3001"
     healthcheck:
-      test: ["CMD-SHELL", "sh -c 'curl http://localhost:3001/health'"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/health || exit 1"]
       interval: 30s
-      timeout: 60s
+      timeout: 10s
       retries: 5
-      start_period: 80s
+      start_period: 30s
+
+  client:
+    build:
+      context: ./client
+      args:
+        - NODE_ENV=production
+    environment:
+      NODE_ENV: production
+    # depends_on:
+    #   server:
+    #     condition: service_healthy
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
 volumes:
   postgres_data:

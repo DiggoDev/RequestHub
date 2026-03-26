@@ -27,6 +27,12 @@ fastify.get('/test', async(request, reply) => {
   return reply.send(dbUser)
 })
 
+fastify.get('/info', (request, reply) => {
+  return reply.send({
+    ...process.env,
+  })
+})
+
 fastify.get('/health', (request, reply) => {
   return reply.send('OK')
 })

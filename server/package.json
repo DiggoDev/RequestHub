@@ -7,15 +7,25 @@
     "dev": "tsx watch src/main.ts --poll",
     "start": "build/main.js",
     "build": "tsc",
+    "postinstall": "prisma generate",
     "lint": "eslint",
     "pretty": "prettier --write src/**/*.ts",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:reset": "prisma migrate reset"
   },
   "keywords": [],
   "author": "DiggoDev",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^7.5.0",
     "dotenv": "^17.3.1",
     "fastify": "^5.8.2",
     "pg": "^8.20.0"
@@ -26,6 +36,7 @@
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "3.8.1",
+    "prisma": "^7.5.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }

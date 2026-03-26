@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-import { initializeDb, insertUser, getUserByUsername } from "./db";
+import { initializeDb, createNewUser, getUserByEmail } from "./db";
 
 const fastify = Fastify({
   logger: true
@@ -17,12 +17,12 @@ fastify.get('/', function (request, reply) {
 })
 
 fastify.get('/test', async(request, reply) => {
-  const username = 'user1410'
+  const email = 'user1410@gmail.com'
   const password = 'pass'
 
-  await insertUser(username, password)
+  await createNewUser(email, password)
 
-  const dbUser = await getUserByUsername(username)
+  const dbUser = await getUserByEmail(email)
 
   return reply.send(dbUser)
 })
@@ -38,9 +38,9 @@ fastify.get('/health', (request, reply) => {
 })
 
 fastify.post('/authenticate', (request, reply) => {
-  const { username, password }: { username: string; password: string  } = JSON.parse(request.body as string)
+  const { email, password }: { email: string; password: string  } = JSON.parse(request.body as string)
 
-  if (username === 'admin' && password === 'password') {
+  if (email === 'admin@gmail.com' && password === 'password') {
     return reply.send({ token: 'admin-token' })
   }
   return reply.code(401).send({ error: 'Invalid credentials' })
